@@ -1,3 +1,6 @@
+#Manually Login to the MS Azure Service
+Login-AzureRmAccount
+
 #Register Required Providers
 Register-AzureRmResourceProvider -ProviderNamespace Microsoft.Network
 Register-AzureRmResourceProvider -ProviderNamespace Microsoft.Storage
@@ -48,3 +51,9 @@ Add-AzureRmVMNetworkInterface -Id $nic.Id
 
 # Create a virtual machine
 New-AzureRmVM -ResourceGroupName $resourceGroup -Location $location -VM $vmConfig
+
+#List all services contained in the WCResourceGroup
+Get-AzureRmResource |
+  Where-Object ResourceGroupName -eq WCResourceGroup |
+    Select-Object Name,Location,ResourceType
+    
